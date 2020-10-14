@@ -1,0 +1,27 @@
+CREATE TABLE users (
+	id SERIAL NOT NULL PRIMARY KEY,
+	username VARCHAR(50) NOT NULL UNIQUE,
+	password VARCHAR(50) NOT NULL,
+	name VARCHAR(50) NOT NULL
+);
+
+
+CREATE TABLE speaker (
+	id SERIAL NOT NULL PRIMARY KEY,
+	name TEXT NOT NULL
+);
+
+CREATE TABLE conference (
+	id SERIAL NOT NULL PRIMARY KEY,
+	talk_name VARCHAR(50) NOT NULL,
+	talk_date DATE NOT NULL,
+	is_afternoon BOOL NOT NULL
+);
+
+CREATE TABLE note (
+	id SERIAL NOT NULL PRIMARY KEY,
+	user_id INTEGER NOT NULL REFERENCES users (id),
+	speaker_id INTEGER NOT NULL REFERENCES speaker (id),
+	conference_id INTEGER NOT NULL REFERENCES conference (id),
+	note_text TEXT NOT NULL
+);
